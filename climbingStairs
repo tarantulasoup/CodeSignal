@@ -1,0 +1,13 @@
+def climbingStairs(n):
+    
+    x = 1
+    y = 1
+
+    for _ in range(int((n - 1)/2)):
+
+        y += x
+        x += y
+        
+    if n % 2 == 0:
+        return x + y
+    return x
