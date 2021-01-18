@@ -1,0 +1,24 @@
+import re
+
+def isAdmissibleOverpayment(prices, notes, x):
+    a = []
+    y = []
+    for z in range(len(notes)):
+        b = re.findall(r"[-+]?\d*\.\d+|\d+|\d", notes[z])
+        if "higher" in notes[z]:
+            y.append(str(int(float(b[0]))) + " h")
+            if float(b[0]) == 0.001 and x == 0:
+                return False
+        if "lower" in notes[z]:
+            y.append(str(int(float(b[0]))) + " l")
+        if "Same" in notes[z]:
+            y.append("s")
+    for n in range(len(prices)):
+        c = prices[n]
+        if y[n] != "s":
+            d = int(y[n].split()[0])
+            if y[n].split()[1] == "h":
+                a.append(int(c - (c / (d + 100) * 100)))
+            else:
+                a.append(int(((c / (100 - d)) * 100) - c)*-1)
+    return sum(a) <= x
