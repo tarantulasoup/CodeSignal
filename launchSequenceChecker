@@ -1,0 +1,13 @@
+def launchSequenceChecker(systemNames, stepNumbers):
+    
+    x = {k: 0 for k in list(set(systemNames))}
+    
+    for n in range(len(systemNames)):
+          
+        if x[systemNames[n]] >= stepNumbers[n]:
+            
+            return False
+        
+        x[systemNames[n]] = stepNumbers[n]
+        
+    return True
